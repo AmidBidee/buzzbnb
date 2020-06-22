@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<img src="{{song.image.url}}" alt="song-image">
+   <h1> {{song.title}}</h1>
+      <p><strong>Artist: {{song.artist}}</strong></p>
+      <p><strong>Featured Artists: {{song.featuredartist}}</strong></p>
+      <p><strong>Released Date: {{song.release_date}}</strong></p>
+      <p><strong>Album: <a href="{{song.get_absolute_url}}">{{song.album}}</a></strong></p>
+      <button><a href="{{song.file.url}}">download</a></button>
+
+<div>
+   <h2> Related Songs </h2>
+      {% for songs in songs_by_artist %}
+         <ul>
+            <li><a href="{{songs.get_absolute_url}}"> {{songs.title}}</a><em> by {{songs.artist}}</em></li>
+         </ul>
+      {% endfor %}
+
+</div>
+{% endblock %}

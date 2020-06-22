@@ -1,0 +1,13 @@
+{% extends 'base/base.html/' %}
+
+{% block content %}
+<h1> Albums </h1>
+
+<ul class='all-albums'>
+    {% for album in albums %}
+    <img src="{{ album.album_art.url }}" id='albums-image' style="width: 5rem; height: 5rem;">
+    <li><a href='{{album.get_absolute_url}}'>{{ album.title}}</a><br><em>{{album.artist}}</em></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

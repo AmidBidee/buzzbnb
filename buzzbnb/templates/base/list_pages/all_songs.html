@@ -1,0 +1,15 @@
+
+{% extends 'base/base.html/' %}
+
+{% block content %}
+<h1> All Songs </h1>
+
+<ul id='all_song'>
+    {% for song in all_songs  %}
+
+    <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
+    <li><a href="{{ song.get_absolute_url }}">{{ song.title }}  </a> by <em><a href="{{artist.get_absolute_url}}">{{song.artist}}</em></a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

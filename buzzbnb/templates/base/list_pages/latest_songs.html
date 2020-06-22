@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<h1>Latest Songs </h1>
+    {% for song in latest_songs %}
+
+        <ul>
+             <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
+        <li><a href="{{ song.get_absolute_url }}">{{ song.title }}<br>{{song.artist}}</a></li>
+        </ul>
+
+    {% endfor %}
+
+    {% for song in  latest_songs_last_month%}
+
+         <ul>
+             <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
+        <li><a href="{{ song.get_absolute_url }}">{{ song.title }}<br>{{song.artist}}</a></li>
+        </ul>
+
+    {% endfor %}
+{% endblock %}
+
