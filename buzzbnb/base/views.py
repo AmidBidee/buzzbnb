@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Song,Artist,Album,GenreAndCategorie
+from .models import Song,Artist,Album,Genre,Categorie
 from django.views.generic import ListView, DetailView
 import datetime
 
@@ -28,10 +28,16 @@ class ArtistList(ListView):
     template_name = 'base/list_pages/all_artists.html'
     query_pk_and_slug = True
 
-class GenreAndCategorieList(ListView):
-    model = GenreAndCategorie
-    context_object_name = 'categorie'
-    template_name = 'base/list_pages/categories.html'
+class GenreList(ListView):
+    model = Genre
+    context_object_name = 'genres'
+    template_name = 'base/list_pages/all_genres.html'
+
+class CategorieList(ListView):
+    model = Categorie
+    context_object_name = 'categories'
+    template_name = 'base/list_pages/all_categories.html'
+
 
 class SongDetail(DetailView):
     model = Song
