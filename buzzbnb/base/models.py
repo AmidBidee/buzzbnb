@@ -1,20 +1,23 @@
 from django.db import models
 from django.urls import reverse
+import datetime
 
-#class SongManager(models.Manager):
-    #def get_queryset(self):
-        #return super(SongManager,
-                     #self).get_queryset()\
-                          #.filter(songs='all_songs')
-#class Single(models.Model):
-    #return models.CharField()
+today = datetime.datetime.now()
+last_month = today.month - 1 if today.month>2 else 12
+last_month_year = today.year if today.month > last_month else today.year - 1
+
+class LatestSongsManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(release_date__year=today.year)
 
 class Genre(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(unique=True, primary_key=True)
-
+    genre_categorie = models.ForeignKey('Categorie',blank=True, on_delete=models.CASCADE)
+    
+            
     class Meta:
-        ordering = ['-name']
+        ordering = ['name']
     
     def __str__(self):
         return self.name
@@ -28,7 +31,7 @@ class Categorie(models.Model):
     slug = models.SlugField(unique=True, primary_key=True)
 
     class Meta:
-        ordering = ['-name']
+        ordering = ['name']
     
     def __str__(self):
         return self.name
@@ -45,7 +48,7 @@ class Artist(models.Model):
     slug = models.SlugField(unique=True)
 
     class Meta:
-        ordering = ['-known_as']
+        ordering = ['known_as']
     
     def __str__(self):
         return self.known_as
@@ -85,7 +88,8 @@ class Song(models.Model):
     image = models.ImageField(upload_to='uploads/media/images/song_image/%y/%m/%d')
     file = models.FileField(upload_to='uploads/media/files/song_files/%y/%m/%d')
     slug = models.SlugField(unique=True, default='')
-    #tags =  
+    objects = models.Manager()
+    #latest_songs = LatestSongsManager()
 
     def __str__(self):
         return self.title

@@ -1,0 +1,22 @@
+{% extends 'base/base.html/' %}
+
+{% block content %}
+<h1> All Categories </h1>
+
+<div id='all_categorie'>
+    
+    {% if categories %}
+
+        {% for categorie in categories  %}
+            <p><a href="{{ categorie.get_absolute_url }}"> {{categorie.name}} </a></p>
+
+        {% endfor %}
+
+    {% else %} 
+            <p> No categorie to show </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -7,13 +7,16 @@
     <title>Best Beat</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
 </head>
 
 <body>
-    <header >
-    Best Beat
+    <div class="container-fluid">
 
-    <a href="{% url 'all-songs'%}"> All Songs</a>
+    <header >
+    Sane Songs
+
+    <a href="{% url 'categorie_or_genre'%}"> All Songs</a>
     <a href="{% url 'all-artists'%}"> All Artists</a>
     <a href="{% url 'Home'%}"> Home </a>
     <a href="{% url 'all-albums' %}"> Albums </a>
@@ -25,7 +28,7 @@
        {% block content %}
        {% endblock %}
 
-
+    </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

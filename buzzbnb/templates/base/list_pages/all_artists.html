@@ -4,11 +4,19 @@
 <h1> All Artists </h1>
 
 <ul class='all_artists'>
-    {% for artist in all_artists  %}
-    <img src="{{ artist.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;"> 
-    <li><a href='{{artist.get_absolute_url}}'>{{ artist.known_as }}</a></li>
-   
-    {% endfor %}
+
+    {% if all_artists %}
+
+        {% for artist in all_artists  %}
+        <img src="{{ artist.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;"> 
+        <li><a href='{{artist.get_absolute_url}}'>{{ artist.known_as }}</a></li>
+    
+        {% endfor %}
+
+    {% else %}
+        <p> There are no Artist here </p>
+        
+    {% endif %}
 </ul>
 
 {% endblock %}

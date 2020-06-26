@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+    <div class='songs_by_genres'>
+
+        {% if all_songs %}
+
+            {% for song in all_songs %}
+             <div class="row" style="
+                                        flex-wrap: wrap;
+                                        margin-right: -15px;
+                                        margin-left: -15px;
+                                        padding: 40px;
+                                        border-bottom: thick;">
+
+      <div class="col-md-4">
+        <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
+      </div>
+      
+      <div class="col-md-4">
+        <a href="{{ song.get_absolute_url }}"> {{ song.title }}  </a> 
+      </div>
+
+      <div class="col-md-4">
+        <a href="{{artist.get_absolute_url}}"> {{song.artist}} </a>
+      </div>
+
+            </div>
+            {% endfor %}
+        
+        {% else %}
+            <p> There are no songs in here at the momment </p>
+
+        {% endif %}
+       
+{% endblock content %}

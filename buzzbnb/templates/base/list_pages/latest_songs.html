@@ -2,22 +2,37 @@
 
 {% block content %}
 <h1>Latest Songs </h1>
-    {% for song in latest_songs %}
 
-        <ul>
-             <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
-        <li><a href="{{ song.get_absolute_url }}">{{ song.title }}<br>{{song.artist}}</a></li>
-        </ul>
+    {% if songs %}
 
-    {% endfor %}
+        {% for song in latest_songs %}
 
-    {% for song in  latest_songs_last_month%}
+            <div class="row" style="
+                                        flex-wrap: wrap;
+                                        margin-right: -15px;
+                                        margin-left: -15px;
+                                        padding: 40px;
+                                        border-bottom: thick;">
 
-         <ul>
-             <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
-        <li><a href="{{ song.get_absolute_url }}">{{ song.title }}<br>{{song.artist}}</a></li>
-        </ul>
+            <div class="col-md-4">
+                <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
+            </div>
+            
+            <div class="col-md-4">
+                <a href="{{ song.get_absolute_url }}"> {{ song.title }}  </a> 
+            </div>
 
-    {% endfor %}
+            <div class="col-md-4">
+                <a href="{{artist.get_absolute_url}}"> {{song.artist}} </a>
+            </div>
+
+            </div>
+        {% endfor %}
+
+    {% else %}
+            <p> There are no songs in here at the momment </p>
+
+    {% endif %}
+       
 {% endblock %}
 

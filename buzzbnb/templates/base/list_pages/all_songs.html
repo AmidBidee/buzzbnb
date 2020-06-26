@@ -4,12 +4,29 @@
 {% block content %}
 <h1> All Songs </h1>
 
-<ul id='all_song'>
+<div id='all-songs'>
     {% for song in all_songs  %}
+  <div class="row" style="
+flex-wrap: wrap;
+margin-right: -15px;
+margin-left: -15px;
+padding: 40px;
+border-bottom: thick;">
 
-    <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
-    <li><a href="{{ song.get_absolute_url }}">{{ song.title }}  </a> by <em><a href="{{artist.get_absolute_url}}">{{song.artist}}</em></a></li>
+      <div class="col-md-4">
+        <img src="{{ song.image.url }}" alt="" id='artist-img' style="width: 5rem; height: 5rem;">
+      </div>
+      
+      <div class="col-md-4">
+        <a href="{{ song.get_absolute_url }}">{{ song.title }}  </a> 
+      </div>
+
+      <div class="col-md-4">
+        <em><a href="{{artist.get_absolute_url}}">{{song.artist}}</em></a>
+      </div>
+
+  </div>
     {% endfor %}
-</ul>
+</div>
 
 {% endblock %}

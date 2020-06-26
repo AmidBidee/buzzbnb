@@ -1,0 +1,11 @@
+
+#all-songs {
+    padding: 40px;
+}
+
+.row {
+    border-width: 10em;
+    border-bottom: 20px;
+    border-radius: 30px;
+    background-color: grey;
+}

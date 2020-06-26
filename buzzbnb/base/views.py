@@ -13,14 +13,18 @@ def HomePage(request):
 
 def LatestSongs(request):
     latest_songs = Song.objects.filter(release_date__year=today.year)
-    latest_songs_last_month = Song.objects.filter(release_date__month=last_month)
+    #latest_songs_last_month = Song.objects.filter(release_date__month=last_month)
     return render(request, 'base/list_pages/latest_songs.html', {'latest_songs': latest_songs})
 
-class AllSongsList(ListView):
-    model = Song
-    template_name = 'base/list_pages/all_songs.html'
-    context_object_name = 'all_songs'
-    query_pk_and_slug = True
+#class LatestSongs(DetailView):
+    #model = Song
+    #template_name = 'base/list_pages/latest_songs.html'
+    #queryset = Song.latest_songs.all()
+    #context_object_name = 'latest_songs'
+
+
+def categorie_or_genre(request):
+    return render(request, 'base/categorie_or_genre.html')
 
 class ArtistList(ListView):
     model =  Artist
@@ -28,21 +32,53 @@ class ArtistList(ListView):
     template_name = 'base/list_pages/all_artists.html'
     query_pk_and_slug = True
 
-class GenreList(ListView):
+class AllGenres(ListView):
     model = Genre
     context_object_name = 'genres'
     template_name = 'base/list_pages/all_genres.html'
 
-class CategorieList(ListView):
+class AllCategories(ListView):
     model = Categorie
     context_object_name = 'categories'
     template_name = 'base/list_pages/all_categories.html'
 
+class SongsByCategorie(DetailView):
+    model = Categorie
+    template_name = 'base/detail_pages/songs_by_categorie.html'
+    context_object_name = 'categories'
+    query_pk_and_slug = True
+
+    def get_queryset(self):
+        self.categorie = get_object_or_404(Categorie, slug=self.kwargs['slug'])
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["all_songs"] = Song.objects.filter(categorie=self.categorie)
+        print(context['all_songs']) 
+        return context
+        
+
+
+class SongsByGenres(DetailView):
+    model = Genre
+    template_name = 'base/detail_pages/songs_by_genres.html/'
+    context_object_name = 'genre'
+    query_pk_and_slug = True
+
+    def get_queryset(self):
+        self.genre = get_object_or_404(Genre, slug=self.kwargs['slug'])
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["all_songs"] = Song.objects.filter(genre=self.genre)
+        print(context['all_songs'])
+        return context
+    
 
 class SongDetail(DetailView):
     model = Song
-    #album = Song.objects.prefetch_related('album')
-    #query_pk_and_slug = True
     template_name = 'base/detail_pages/song.html'
     query_pk_and_slug = True
 

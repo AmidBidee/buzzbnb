@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1> List Songs by <h1>
+
+        <p class='categorie-tile'><a href="{% url 'all-categories' %}"> Categories</a></p>
+        <p class='genre-tile'><a href="{% url 'all-genres' %}"> Genres </a></p>
+
+{% endblock content %}

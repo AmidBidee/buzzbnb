@@ -1,0 +1,23 @@
+{% extends 'base/base.html/' %}
+
+{% block content %}
+<h1> All Genres </h1>
+
+<div id='all_genres'>
+
+    {% if genres %}
+
+        {% for genre in genres  %}
+
+           <p><a href="{{ genre.get_absolute_url}}"> {{genre.name}} </a> </p>
+
+        {% endfor %}
+        
+    {% else %} 
+            <p> No genre to show </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
