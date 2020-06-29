@@ -1,26 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Song,Artist,Album,Genre,Categorie
+from .models import Artist,Genre,Categorie,Album,Song
 from django.views.generic import ListView, DetailView
-import datetime
-
-today = datetime.datetime.now()
-last_month = today.month - 1 if today.month>2 else 12
-last_month_year = today.year if today.month > last_month else today.year - 1
-
 
 def HomePage(request):
     return render(request, 'base/base.html')
 
 def LatestSongs(request):
-    latest_songs = Song.objects.filter(release_date__year=today.year)
+    latest_songs = Song.latest_songs.all()
     #latest_songs_last_month = Song.objects.filter(release_date__month=last_month)
     return render(request, 'base/list_pages/latest_songs.html', {'latest_songs': latest_songs})
-
-#class LatestSongs(DetailView):
-    #model = Song
-    #template_name = 'base/list_pages/latest_songs.html'
-    #queryset = Song.latest_songs.all()
-    #context_object_name = 'latest_songs'
 
 
 def categorie_or_genre(request):
@@ -34,7 +22,7 @@ class ArtistList(ListView):
 
 class AllGenres(ListView):
     model = Genre
-    context_object_name = 'genres'
+    context_object_name = 'gSenres'
     template_name = 'base/list_pages/all_genres.html'
 
 class AllCategories(ListView):

@@ -4,5 +4,3 @@ from .artist import Artist
 from .category import Categorie
 from .genre import Genre
 from .song import Song
-
-today = datetime.datetime.now()
